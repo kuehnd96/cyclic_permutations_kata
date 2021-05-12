@@ -43,12 +43,45 @@ namespace Kata
         /// <returns></returns>
         public String CyclicPermutations(int number)
         {
+            const string NewLine = "\n";
+
             if (number < 1)                                                                                                                                                                                                                                                                    
             {
                 return string.Empty;
             }
 
-            return "";
+            if (number == 1)
+            {
+                return "1";
+            }
+
+            // Create initial flow
+            var permutationBuilder = new StringBuilder();
+
+            for (int i=1; i<= number; i++)
+            {
+                permutationBuilder.Append(i);
+            }
+
+            string permutation = permutationBuilder.ToString();
+            permutationBuilder.Append(NewLine);
+
+            // Create the rest of the permutations
+            for (int p=1; p <= number-1; p++)
+            {
+                char lastNumber = permutation.Last();
+
+                permutation = lastNumber + permutation.Substring(0, number - 1);
+
+                permutationBuilder.Append(permutation);
+
+                if (p < number-1)
+                {
+                    permutationBuilder.Append(NewLine);
+                }
+            }
+
+            return permutationBuilder.ToString();
         }
 
 
