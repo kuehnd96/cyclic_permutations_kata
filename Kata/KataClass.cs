@@ -43,12 +43,50 @@ namespace Kata
         /// <returns></returns>
         public String CyclicPermutations(int number)
         {
+            const string NewLine = "\n";
+
             if (number < 1)                                                                                                                                                                                                                                                                    
             {
                 return string.Empty;
             }
 
-            return "";
+            if (number == 1)
+            {
+                return "1";
+            }
+
+            int secondMax = number;
+            int firstStart = number;
+            StringBuilder outputBuilder = new StringBuilder();
+
+            for (int firstCount=0; firstCount < number; firstCount++)
+            {
+                if (firstCount > 0)
+                {
+                    // First
+                    for (int f = firstStart; f <= number; f++)
+                    {
+                        outputBuilder.Append(f);
+                    }
+
+                    firstStart--;
+                }
+
+                // Second
+                for (int u = 1; u <= secondMax; u++)
+                {
+                    outputBuilder.Append(u);
+                }
+
+                if (firstCount != number - 1)
+                {
+                    outputBuilder.Append(NewLine);
+                }
+
+                secondMax--;
+            }
+
+            return outputBuilder.ToString();
         }
 
 
